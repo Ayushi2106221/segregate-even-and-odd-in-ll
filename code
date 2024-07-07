@@ -1,0 +1,41 @@
+ Node* divide(int N, Node *head){
+        if(head==NULL) return NULL;
+        Node *evenhead=new Node(-1);
+        Node * eventail=evenhead;
+        Node *oddhead=new Node(-1);
+        Node * oddtail=oddhead;
+        Node *temp=head;
+        int val=0;
+        Node *t1=NULL;
+        while(temp!=NULL){
+            t1=temp->next;
+            val=temp->data;
+            if(val%2){
+                //insertattail(oddtail,temp);
+                oddtail->next=temp;
+                temp->next=NULL;
+                oddtail=temp;
+            }
+            else{
+                //insertattail(eventail,temp);
+                eventail->next=temp;
+                temp->next=NULL;
+                eventail=temp;
+            }
+            temp=t1;
+        }
+        if(evenhead->next==NULL){
+            delete evenhead;
+            delete oddhead;
+            return head;
+        }
+        else{
+            eventail->next=oddhead->next;
+            head=evenhead->next;
+          delete evenhead;
+            delete oddhead;
+            return head;
+            // oddtail->next=NULL;
+        }
+        
+    }
